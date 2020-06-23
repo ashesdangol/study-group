@@ -1,3 +1,5 @@
+<?php get_header();  ?>
+
 <h1><?php bloginfo();  ?></h1>
 <p>powered by index</p>
 
@@ -12,4 +14,5 @@
     <hr>
 <?php    
   }
+  get_footer();
 ?>
