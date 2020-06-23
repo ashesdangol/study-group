@@ -23,7 +23,7 @@ class RunAfterCompile {
       // update functions php here
       const manifest = fse.readJsonSync("./bundled-assets/manifest.json")
 
-      fse.readFile("./functions.php", "utf8", function (err, data) {
+      fse.readFile("./wp-content/themes/study-group/functions.php", "utf8", function (err, data) {
         if (err) {
           console.log(err)
         }
@@ -34,7 +34,7 @@ class RunAfterCompile {
 
         let result = data.replace(scriptsRegEx, `/bundled-assets/${manifest["scripts.js"]}'`).replace(vendorsRegEx, `/bundled-assets/${manifest["vendors~scripts.js"]}'`).replace(cssRegEx, `/bundled-assets/${manifest["scripts.css"]}'`)
 
-        fse.writeFile("./functions.php", result, "utf8", function (err) {
+        fse.writeFile("./wp-content/themes/study-group/functions.php", result, "utf8", function (err) {
           if (err) return console.log(err)
         })
       })
@@ -49,7 +49,7 @@ let cssConfig = {
 
 let config = {
   entry: {
-    scripts: "./js/scripts.js"
+    scripts: "./wp-content/themes/study-group/assets/scripts/scripts.js"
   },
   plugins: [],
   module: {
@@ -113,7 +113,7 @@ if (currentTask == "build" || currentTask == "buildWatch") {
   cssConfig.use.unshift(MiniCssExtractPlugin.loader)
   postCSSPlugins.push(require("cssnano"))
   config.output = {
-    publicPath: "/wp-content/themes/fictional-university-theme/bundled-assets/",
+    publicPath: "./wp-content/themes/study-group/bundled-assets",
     filename: "[name].[chunkhash].js",
     chunkFilename: "[name].[chunkhash].js",
     path: path.resolve(__dirname, "bundled-assets")
